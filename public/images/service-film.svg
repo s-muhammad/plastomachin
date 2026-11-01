@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="filmTitle">
+  <title id="filmTitle">تصویر جایگزین دستگاه تولید نایلون</title>
+  <defs>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#092747"/>
+      <stop offset="1" stop-color="#1b588b"/>
+    </linearGradient>
+    <linearGradient id="bubble" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#dff4ff" stop-opacity=".15"/>
+      <stop offset=".45" stop-color="#ffffff" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#b9dff3" stop-opacity=".08"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#b)"/>
+  <g opacity=".25" stroke="#6ca7d4" stroke-width="2">
+    <path d="M0 120h1200M0 240h1200M0 360h1200M0 480h1200M0 600h1200"/>
+    <path d="M120 0v700M320 0v700M520 0v700M720 0v700M920 0v700M1120 0v700"/>
+  </g>
+  <circle cx="900" cy="120" r="220" fill="#f6a21a" opacity=".08"/>
+  <!-- tower -->
+  <g>
+    <rect x="420" y="150" width="26" height="420" fill="#3f85b9"/>
+    <rect x="720" y="150" width="26" height="420" fill="#3f85b9"/>
+    <rect x="400" y="150" width="366" height="22" rx="6" fill="#2a6b9f"/>
+    <rect x="400" y="530" width="366" height="26" rx="6" fill="#2a6b9f"/>
+    <rect x="440" y="80" width="286" height="18" rx="6" fill="#5a9aca"/>
+    <path d="M470 110c-18 50-24 100-20 150 4 56 26 96 58 120h152c32-24 54-64 58-120 4-50-2-100-20-150z" fill="url(#bubble)" stroke="#e0f4ff" stroke-opacity=".3" stroke-width="3"/>
+    <path d="M500 130c-14 44-18 88-14 130" stroke="#fff" stroke-opacity=".6" stroke-width="9" fill="none"/>
+    <rect x="440" y="400" width="290" height="24" rx="10" fill="#1a4e79"/>
+    <circle cx="520" cy="500" r="40" fill="#0b2a4a" stroke="#6ca7d4" stroke-width="3"/>
+    <circle cx="520" cy="500" r="10" fill="#f6a21a"/>
+    <circle cx="660" cy="500" r="40" fill="#0b2a4a" stroke="#6ca7d4" stroke-width="3"/>
+    <circle cx="660" cy="500" r="10" fill="#f6a21a"/>
+  </g>
+  <!-- film roll -->
+  <g transform="translate(150 330)">
+    <circle cx="130" cy="130" r="128" fill="#dceaf5" opacity=".92"/>
+    <circle cx="130" cy="130" r="96" fill="none" stroke="#7aa7c4" stroke-width="3" opacity=".5"/>
+    <circle cx="130" cy="130" r="34" fill="#0b2a4a"/>
+    <circle cx="130" cy="130" r="13" fill="#f6a21a"/>
+  </g>
+  <rect x="0" y="590" width="1200" height="14" fill="#f6a21a" opacity=".8"/>
+</svg>

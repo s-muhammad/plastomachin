@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="aboutTitle">
+  <title id="aboutTitle">تصویر جایگزین رول‌های نایلون در کارخانه</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b2c4e"/>
+      <stop offset="1" stop-color="#153f67"/>
+    </linearGradient>
+    <radialGradient id="roll" cx=".35" cy=".3" r=".8">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".6" stop-color="#d9eaf6"/>
+      <stop offset="1" stop-color="#9fc4dc"/>
+    </radialGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f6a21a"/>
+      <stop offset="1" stop-color="#e58a00"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#03101e" flood-opacity=".45"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <g opacity=".35" stroke="#4d83ad" stroke-width="2">
+    <path d="M0 180h1200M0 360h1200M0 540h1200M0 720h1200"/>
+    <path d="M200 0v900M400 0v900M600 0v900M800 0v900M1000 0v900"/>
+  </g>
+  <circle cx="980" cy="120" r="260" fill="#f6a21a" opacity=".08"/>
+  <circle cx="150" cy="760" r="230" fill="#25d366" opacity=".06"/>
+
+  <g filter="url(#shadow)">
+    <g transform="translate(170 300)">
+      <rect x="0" y="0" width="360" height="330" rx="165" fill="url(#roll)"/>
+      <circle cx="180" cy="165" r="60" fill="#0b2c4e" opacity=".85"/>
+      <circle cx="180" cy="165" r="28" fill="#f6a21a"/>
+      <path d="M46 92c84-62 214-52 278 46" stroke="#fff" stroke-width="9" fill="none" opacity=".6"/>
+    </g>
+    <g transform="translate(500 410) rotate(-10 200 200)">
+      <rect x="0" y="0" width="430" height="390" rx="195" fill="url(#roll)" opacity=".97"/>
+      <circle cx="215" cy="195" r="76" fill="#0b2c4e" opacity=".85"/>
+      <circle cx="215" cy="195" r="34" fill="#f6a21a"/>
+      <path d="M70 100c100-50 220-30 296 60" stroke="#fff" stroke-width="10" fill="none" opacity=".55"/>
+    </g>
+    <g transform="translate(720 240)">
+      <rect x="0" y="0" width="300" height="280" rx="140" fill="url(#roll)" opacity=".9"/>
+      <circle cx="150" cy="140" r="52" fill="#0b2c4e" opacity=".8"/>
+      <circle cx="150" cy="140" r="22" fill="#f6a21a"/>
+    </g>
+  </g>
+
+  <!-- floor reflection -->
+  <rect x="0" y="720" width="1200" height="180" fill="#061a2e" opacity=".45"/>
+  <g opacity=".18" fill="#bfe4ff">
+    <rect x="180" y="730" width="330" height="26" rx="13"/>
+    <rect x="540" y="748" width="380" height="22" rx="11"/>
+    <rect x="760" y="768" width="250" height="18" rx="9"/>
+  </g>
+  <rect x="0" y="0" width="18" height="900" fill="url(#side)"/>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="printTitle">
+  <title id="printTitle">تصویر جایگزین دستگاه چاپ نایلون</title>
+  <defs>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a2a4a"/>
+      <stop offset="1" stop-color="#1a5283"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#b)"/>
+  <g opacity=".22" stroke="#6ca7d4" stroke-width="2">
+    <path d="M0 140h1200M0 280h1200M0 420h1200M0 560h1200"/>
+    <path d="M180 0v700M380 0v700M580 0v700M780 0v700M980 0v700"/>
+  </g>
+  <!-- rollers -->
+  <g>
+    <rect x="250" y="150" width="700" height="28" rx="10" fill="#2f76aa"/>
+    <rect x="250" y="470" width="700" height="28" rx="10" fill="#2f76aa"/>
+    <g fill="#dcecf7">
+      <circle cx="360" cy="300" r="95"/>
+      <circle cx="600" cy="300" r="95"/>
+      <circle cx="840" cy="300" r="95"/>
+    </g>
+    <g fill="#0b2a4a">
+      <circle cx="360" cy="300" r="28"/>
+      <circle cx="600" cy="300" r="28"/>
+      <circle cx="840" cy="300" r="28"/>
+    </g>
+    <g fill="#f6a21a">
+      <circle cx="360" cy="300" r="10"/>
+      <circle cx="600" cy="300" r="10"/>
+      <circle cx="840" cy="300" r="10"/>
+    </g>
+    <!-- ink colors -->
+    <g>
+      <circle cx="470" cy="500" r="18" fill="#00a8e8"/>
+      <circle cx="520" cy="500" r="18" fill="#e5356b"/>
+      <circle cx="570" cy="500" r="18" fill="#f6c51a"/>
+      <circle cx="620" cy="500" r="18" fill="#1a1a1a"/>
+    </g>
+    <!-- film web -->
+    <path d="M250 420h700v40H250z" fill="#dcecf7" opacity=".65"/>
+    <path d="M280 400h640v10H280z" fill="#f6a21a" opacity=".6"/>
+  </g>
+  <rect x="0" y="630" width="1200" height="14" fill="#f6a21a" opacity=".8"/>
+</svg>

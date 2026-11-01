@@ -1,0 +1,172 @@
+@import 'tailwindcss';
+@import 'basecoat-css/vega';
+@import '@fontsource-variable/vazirmatn';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Vazirmatn Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Vazirmatn Variable', ui-sans-serif, system-ui, sans-serif;
+
+    --color-navy: #0b2949;
+    --color-navy-950: #061a2e;
+    --color-navy-900: #082442;
+    --color-navy-800: #0b2d52;
+    --color-navy-700: #123c69;
+    --color-brand: #f6a21a;
+    --color-brand-dark: #e08b00;
+    --color-whatsapp: #25d366;
+    --color-whatsapp-dark: #1eb955;
+    --color-cream: #f5f7fb;
+}
+
+:root {
+    --primary: #0b2949;
+    --primary-foreground: #ffffff;
+    --ring: #f6a21a;
+    --radius: 0.75rem;
+    --sidebar: #0b2949;
+    --sidebar-foreground: #e8f0f9;
+    --sidebar-primary: #f6a21a;
+    --sidebar-primary-foreground: #0b2949;
+    --sidebar-accent: #14395f;
+    --sidebar-accent-foreground: #ffffff;
+    --sidebar-border: rgba(255, 255, 255, 0.12);
+    --sidebar-ring: #f6a21a;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01';
+}
+
+::selection {
+    background: #f6a21a;
+    color: #0b2949;
+}
+
+@layer components {
+    .container-site {
+        @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .btn-brand {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-bold text-navy-950 shadow-sm transition hover:bg-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+    }
+
+    .btn-navy {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-navy px-6 py-3 text-sm font-bold text-white transition hover:bg-navy-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy;
+    }
+
+    .btn-whatsapp {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-whatsapp-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-whatsapp;
+    }
+
+    .btn-outline-light {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/55 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
+    }
+
+    .section-title {
+        @apply text-2xl font-extrabold text-navy sm:text-3xl;
+    }
+
+    .section-kicker {
+        @apply mb-3 flex items-center justify-center gap-2 text-sm font-bold text-brand;
+    }
+
+    .rich-text {
+        @apply text-[15px] leading-8 text-slate-600;
+    }
+
+    .rich-text h2 {
+        @apply mt-8 mb-3 text-xl font-extrabold text-navy sm:text-2xl;
+    }
+
+    .rich-text h3 {
+        @apply mt-6 mb-2 text-lg font-bold text-navy;
+    }
+
+    .rich-text p {
+        @apply mb-4;
+    }
+
+    .rich-text ul {
+        @apply mb-5 list-disc space-y-2 ps-6;
+    }
+
+    .rich-text ol {
+        @apply mb-5 list-decimal space-y-2 ps-6;
+    }
+
+    .rich-text a {
+        @apply font-semibold text-brand-dark underline underline-offset-4;
+    }
+
+    .rich-text strong {
+        @apply font-bold text-navy;
+    }
+
+    .rich-text blockquote {
+        @apply my-6 border-s-4 border-brand bg-cream px-5 py-3 text-slate-600;
+    }
+}
+
+/* Public accordion */
+.faq-item {
+    @apply border-b border-slate-200 last:border-0;
+}
+
+.faq-item > summary {
+    @apply flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-start text-[15px] font-bold text-navy transition hover:text-brand-dark;
+}
+
+.faq-item > summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item > summary .faq-icon {
+    @apply flex size-8 shrink-0 items-center justify-center rounded-full bg-cream text-navy transition;
+}
+
+.faq-item[open] > summary .faq-icon {
+    @apply rotate-45 bg-brand text-navy-950;
+}
+
+.faq-item > div {
+    @apply pb-5 text-sm leading-7 text-slate-600;
+}
+
+/* Hero */
+.hero-glow {
+    background:
+        radial-gradient(circle at 12% 30%, rgba(246, 162, 26, 0.22), transparent 38%),
+        radial-gradient(circle at 80% 70%, rgba(37, 211, 102, 0.08), transparent 32%);
+}
+
+/* Floating mobile contact buttons */
+.floating-contact {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+}
+
+/* Map placeholder */
+.map-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.map-card img {
+    @apply h-full w-full object-cover;
+}
+
+.map-pin {
+    @apply absolute inset-0 flex items-center justify-center;
+}
+

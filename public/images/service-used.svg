@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="usedTitle">
+  <title id="usedTitle">تصویر جایگزین دستگاه دست‌دوم نایلون</title>
+  <defs>
+    <linearGradient id="b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#092747"/>
+      <stop offset="1" stop-color="#1a4f7c"/>
+    </linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6a21a"/>
+      <stop offset="1" stop-color="#e58a00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#b)"/>
+  <g opacity=".22" stroke="#6ca7d4" stroke-width="2">
+    <path d="M0 140h1200M0 280h1200M0 420h1200M0 560h1200"/>
+    <path d="M180 0v700M380 0v700M580 0v700M780 0v700M980 0v700"/>
+  </g>
+  <!-- big gear -->
+  <g transform="translate(600 350)">
+    <circle r="190" fill="none" stroke="#5a9aca" stroke-width="3" opacity=".4"/>
+    <circle r="140" fill="#0b2a4a" stroke="#3f85b9" stroke-width="5"/>
+    <circle r="64" fill="url(#g)"/>
+    <circle r="22" fill="#0b2a4a"/>
+    <g fill="#3f85b9">
+      <rect x="-16" y="-188" width="32" height="52" rx="8"/>
+      <rect x="-16" y="-188" width="32" height="52" rx="8" transform="rotate(45)"/>
+      <rect x="-16" y="-188" width="32" height="52" rx="8" transform="rotate(90)"/>
+      <rect x="-16" y="-188" width="32" height="52" rx="8" transform="rotate(135)"/>
+      <rect x="-16" y="-188" width="32" height="52" rx="8" transform="rotate(180)"/>
+      <rect x="-16" y="-188" width="32" height="52" rx="8" transform="rotate(225)"/>
+      <rect x="-16" y="-188" width="32" height="52" rx="8" transform="rotate(270)"/>
+      <rect x="-16" y="-188" width="32" height="52" rx="8" transform="rotate(315)"/>
+    </g>
+    <!-- refresh arrow -->
+    <path d="M-40 0a40 40 0 0 1 68-28" stroke="#fff" stroke-width="6" fill="none" opacity=".8"/>
+    <path d="M28-34l8 14-16 4z" fill="#fff" opacity=".8"/>
+  </g>
+  <rect x="0" y="630" width="1200" height="14" fill="#f6a21a" opacity=".8"/>
+</svg>
