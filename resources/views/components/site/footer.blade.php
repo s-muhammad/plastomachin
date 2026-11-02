@@ -79,7 +79,7 @@
 
         <div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs text-white/45 sm:flex-row sm:text-start">
             <p>© {{ \App\Support\Jalali::year(now()) }} {{ setting('site_name', 'پلاستو ماشین') }}؛ تمامی حقوق محفوظ است.</p>
-            <p>طراحی و توسعه‌ی اختصاصی</p>
+            <p>طراحی و توسعه‌ی اختصاصی <a href="https://devprofile.ir" target="_blank">DevProfile.ir</a></p>
         </div>
     </div>
 </footer>

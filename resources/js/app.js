@@ -89,6 +89,13 @@ onReady(() => {
         });
     });
 
+    // Rich text editor (only loaded on admin pages that use it)
+    if (document.querySelector('textarea[data-editor]')) {
+        import('./editor')
+            .then(({ initEditors }) => initEditors())
+            .catch((error) => console.error('CKEditor bundle failed to load:', error));
+    }
+
     // Confirmation for delete buttons
     document.querySelectorAll('form[data-confirm]').forEach((form) => {
         form.addEventListener('submit', (event) => {

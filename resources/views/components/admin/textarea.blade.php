@@ -6,6 +6,7 @@
     'help' => null,
     'required' => false,
     'dir' => null,
+    'editor' => false,
 ])
 
 @php
@@ -27,6 +28,7 @@
         rows="{{ $rows }}"
         @if ($required) required @endif
         @if ($dir) dir="{{ $dir }}" @endif
+        @if ($editor) data-editor @endif
         @if ($invalid) aria-invalid="true" aria-describedby="{{ $inputId }}-error" @endif
         {{ $attributes }}
     >{{ old($name, $value) }}</textarea>

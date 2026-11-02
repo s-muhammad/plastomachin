@@ -58,12 +58,11 @@
 
                     <x-admin.textarea
                         name="body"
-                        label="متن صفحه (HTML)"
+                        label="متن صفحه"
                         :value="$service->body"
                         :rows="16"
-                        dir="ltr"
-                        class="min-h-72 font-mono !text-xs leading-6"
-                        help="تگ‌های مجاز: p، h2، h3، ul، ol، li، strong، a و blockquote."
+                        editor
+                        help="متن را با ویرایشگر بنویسید. برای درج تصویر از دکمه‌ی تصویر و آدرس تصویر استفاده کنید."
                     />
                 </div>
             </div>

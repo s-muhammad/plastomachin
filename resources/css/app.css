@@ -116,6 +116,18 @@ body {
     .rich-text blockquote {
         @apply my-6 border-s-4 border-brand bg-cream px-5 py-3 text-slate-600;
     }
+
+    .rich-text img {
+        @apply my-6 w-full rounded-xl border border-slate-200;
+    }
+
+    .rich-text figure {
+        @apply my-6;
+    }
+
+    .rich-text figcaption {
+        @apply mt-2 text-center text-xs text-slate-500;
+    }
 }
 
 /* Public accordion */
@@ -168,5 +180,62 @@ body {
 
 .map-pin {
     @apply absolute inset-0 flex items-center justify-center;
+}
+
+/* CKEditor 5 (admin rich text fields) */
+.ck.ck-editor {
+    --ck-border-radius: 0.75rem;
+    --ck-color-base-border: #e2e8f0;
+    --ck-color-base-background: #ffffff;
+    --ck-color-focus-border: #f6a21a;
+    width: 100%;
+}
+
+.ck.ck-editor__top .ck-sticky-panel .ck-toolbar {
+    border-start-start-radius: 0.75rem;
+    border-start-end-radius: 0.75rem;
+}
+
+.ck.ck-editor__main > .ck-editor__editable {
+    min-height: 24rem;
+    border-end-start-radius: 0.75rem;
+    border-end-end-radius: 0.75rem;
+    direction: rtl;
+    text-align: right;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.ck.ck-editor__main > .ck-editor__editable.ck-focused {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 1px var(--ring);
+}
+
+.ck-content {
+    font-family: var(--font-sans);
+}
+
+.ck-content h2 {
+    color: var(--color-navy);
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.7;
+}
+
+.ck-content h3 {
+    color: var(--color-navy);
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.7;
+}
+
+.ck-content a {
+    color: var(--color-brand-dark);
+}
+
+.ck-content blockquote {
+    border-inline-start-color: var(--color-brand);
+    background: var(--color-cream);
 }
 

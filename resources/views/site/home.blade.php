@@ -3,7 +3,7 @@
 @section('content')
     <!-- Hero -->
     <section class="relative overflow-hidden bg-navy-950 text-white">
-        <img src="{{ asset('images/hero-factory.svg') }}" alt="خط تولید نایلون و رول‌های فیلم پلاستیکی" width="1600" height="950" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
+        <img src="{{ asset('images/hero.png') }}" alt="خط تولید نایلون و رول‌های فیلم پلاستیکی" width="1600" height="950" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
         <div class="absolute inset-0 bg-gradient-to-l from-navy-950 via-navy-950/90 to-navy-950/20"></div>
         <div class="absolute inset-0 hero-glow"></div>
 
@@ -104,20 +104,37 @@
                 روی هر حوزه بزنید تا توضیحات، نکات خرید و سوالات متداول آن را ببینید.
             </x-section-heading>
 
-            <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-6">
                 @foreach ($services as $service)
-                    <x-service-card :service="$service" />
+                    <x-service-card :service="$service" :index="$loop->iteration" />
                 @endforeach
 
-                <a href="{{ route('contact') }}" class="group flex h-full flex-col justify-between rounded-2xl bg-navy p-6 text-white shadow-sm transition hover:-translate-y-1 hover:bg-navy-800 hover:shadow-lg">
-                    <span class="flex size-14 items-center justify-center rounded-2xl bg-white/10 text-brand">
-                        <x-icon name="headset" class="size-7" />
-                    </span>
-                    <div class="mt-6">
+                <a href="{{ route('contact') }}" class="group relative flex h-full min-h-[19rem] flex-col justify-between overflow-hidden rounded-[1.75rem] bg-navy p-6 text-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-28px_rgba(11,41,73,0.6)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7">
+                    <img
+                        src="{{ asset('images/hero-factory.svg') }}"
+                        alt=""
+                        width="1600"
+                        height="950"
+                        loading="lazy"
+                        class="absolute inset-0 h-full w-full object-cover opacity-30 transition duration-700 group-hover:scale-105 group-hover:opacity-40"
+                    >
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/85 to-navy-950/35"></div>
+
+                    <div class="relative flex items-center justify-between gap-3">
+                        <span class="flex size-14 items-center justify-center rounded-2xl bg-white/10 text-brand ring-1 ring-inset ring-white/15 backdrop-blur">
+                            <x-icon name="headset" class="size-7" />
+                        </span>
+                        <span class="flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/70 transition duration-300 group-hover:border-brand group-hover:bg-brand group-hover:text-navy-950">
+                            <x-icon name="arrow-left" class="size-4" />
+                        </span>
+                    </div>
+
+                    <div class="relative mt-8">
                         <h3 class="text-lg font-extrabold leading-8">حوزه‌ی دیگری مدنظر دارید؟</h3>
                         <p class="mt-2 text-sm leading-7 text-white/65">نیاز خود را با ما در میان بگذارید تا گزینه‌های مرتبط را بررسی کنیم.</p>
                     </div>
-                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand">
+
+                    <span class="relative mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand">
                         گفتگو با ما
                         <x-icon name="arrow-left" class="size-4 transition group-hover:-translate-x-1" />
                     </span>
@@ -160,7 +177,7 @@
                 <div class="relative lg:col-span-6">
                     <div class="absolute -bottom-4 -start-4 h-40 w-40 rounded-2xl border-[10px] border-brand/20"></div>
                     <div class="relative overflow-hidden rounded-[1.75rem] border-4 border-white shadow-2xl">
-                        <img src="{{ asset('images/about-factory.svg') }}" alt="رول‌های نایلون تولیدشده در کارخانه" width="1200" height="900" loading="lazy" class="aspect-[4/3] h-full w-full object-cover">
+                        <img src="{{ asset('images/about.jpg') }}" alt="رول‌های نایلون تولیدشده در کارخانه" width="1200" height="900" loading="lazy" class="aspect-[4/3] h-full w-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-navy-950/35 to-transparent"></div>
                     </div>
                     <div class="absolute bottom-4 start-4 flex items-center gap-2 rounded-xl bg-white/95 px-3 py-2 text-xs font-bold text-navy shadow-lg backdrop-blur">
