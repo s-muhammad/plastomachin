@@ -3,8 +3,14 @@
 @section('content')
     <!-- Hero -->
     <section class="relative overflow-hidden bg-navy-950 text-white">
-        <img src="{{ asset('images/hero.png') }}" alt="خط تولید نایلون و رول‌های فیلم پلاستیکی" width="1600" height="950" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
-        <div class="absolute inset-0 bg-gradient-to-l from-navy-950 via-navy-950/90 to-navy-950/20"></div>
+        <img src="{{ asset('images/hero.jpg') }}" alt="خط تولید نایلون و رول‌های فیلم پلاستیکی" width="1600" height="950"
+            class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
+
+        <!-- دسکتاپ: گرادیانت افقی از سمت متن (راست در RTL) -->
+        <div class="absolute inset-0 hidden md:block bg-gradient-to-l from-navy-950 via-navy-950/85 to-navy-950/10"></div>
+
+        <!-- موبایل: گرادیانت عمودی پررنگ -->
+        <div class="absolute inset-0 md:hidden bg-gradient-to-t from-navy-950 via-navy-950/85 to-navy-950/60"></div>
         <div class="absolute inset-0 hero-glow"></div>
 
         <div class="container-site relative flex min-h-[560px] items-center py-14 sm:py-20 lg:min-h-[630px]">
@@ -111,7 +117,7 @@
 
                 <a href="{{ route('contact') }}" class="group relative flex h-full min-h-[19rem] flex-col justify-between overflow-hidden rounded-[1.75rem] bg-navy p-6 text-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-28px_rgba(11,41,73,0.6)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-7">
                     <img
-                        src="{{ asset('images/hero-factory.svg') }}"
+                        src="{{ asset('images/hero.png') }}"
                         alt=""
                         width="1600"
                         height="950"
