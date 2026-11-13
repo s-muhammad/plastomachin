@@ -104,4 +104,60 @@ onReady(() => {
             }
         });
     });
+
+    // Character counters used by the SEO screens
+    document.querySelectorAll('[data-char-counter]').forEach((counter) => {
+        const input = document.getElementById(counter.dataset.charCounter);
+        if (!input) return;
+
+        const max = Number(counter.dataset.max) || 0;
+        const update = () => {
+            const length = Array.from(input.value).length;
+            counter.textContent = `${length.toLocaleString('fa-IR')} / ${max.toLocaleString('fa-IR')} نویسه`;
+            counter.classList.toggle('text-brand-dark', max > 0 && length > max);
+            counter.classList.toggle('font-bold', max > 0 && length > max);
+        };
+
+        input.addEventListener('input', update);
+        update();
+    });
+
+    // Shared create dialogs: reset fields each time they are opened.
+    document.querySelectorAll('[data-create-dialog]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const dialog = document.getElementById(button.dataset.createDialog);
+            if (!dialog) return;
+
+            dialog.querySelector('form')?.reset();
+            dialog.showModal();
+        });
+    });
+
+    // Shared edit dialogs: fill the form from the clicked row and open it.
+    document.querySelectorAll('[data-edit-dialog]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const dialog = document.getElementById(button.dataset.editDialog);
+            const form = dialog?.querySelector('form');
+            if (!dialog || !form) return;
+
+            if (button.dataset.action) {
+                form.action = button.dataset.action;
+            }
+
+            let record = {};
+            try {
+                record = JSON.parse(button.dataset.record || '{}');
+            } catch (error) {
+                record = {};
+            }
+
+            Object.entries(record).forEach(([name, value]) => {
+                const field = form.elements.namedItem(name);
+                if (!field) return;
+                field.value = value ?? '';
+            });
+
+            dialog.showModal();
+        });
+    });
 });

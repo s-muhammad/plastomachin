@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SeoPageController;
+use App\Http\Controllers\Admin\SeoPlanController;
 use App\Http\Controllers\Admin\ServicePageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Site\BlogController;
@@ -54,5 +55,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/seo', [SeoPageController::class, 'index'])->name('seo.index');
         Route::put('/seo/{seoPage}', [SeoPageController::class, 'update'])->name('seo.update');
+
+        Route::prefix('seo-plan')->name('seo-plan.')->group(function () {
+            Route::get('/', [SeoPlanController::class, 'index'])->name('index');
+
+            Route::post('/keywords', [SeoPlanController::class, 'storeKeyword'])->name('keywords.store');
+            Route::post('/keywords/import/preview', [SeoPlanController::class, 'previewImport'])->name('keywords.import.preview');
+            Route::post('/keywords/import', [SeoPlanController::class, 'import'])->name('keywords.import');
+            Route::get('/keywords/export', [SeoPlanController::class, 'exportKeywords'])->name('keywords.export');
+            Route::put('/keywords/{keyword}', [SeoPlanController::class, 'updateKeyword'])->name('keywords.update');
+            Route::patch('/keywords/{keyword}/inline', [SeoPlanController::class, 'inlineKeyword'])->name('keywords.inline');
+            Route::delete('/keywords/{keyword}', [SeoPlanController::class, 'destroyKeyword'])->name('keywords.destroy');
+            Route::post('/keywords/{keyword}/task', [SeoPlanController::class, 'createTask'])->name('keywords.task');
+
+            Route::post('/tasks', [SeoPlanController::class, 'storeTask'])->name('tasks.store');
+            Route::post('/tasks/import/preview', [SeoPlanController::class, 'previewTaskImport'])->name('tasks.import.preview');
+            Route::post('/tasks/import', [SeoPlanController::class, 'importTasks'])->name('tasks.import');
+            Route::put('/tasks/{task}', [SeoPlanController::class, 'updateTask'])->name('tasks.update');
+            Route::patch('/tasks/{task}/status', [SeoPlanController::class, 'updateTaskStatus'])->name('tasks.status');
+            Route::delete('/tasks/{task}', [SeoPlanController::class, 'destroyTask'])->name('tasks.destroy');
+        });
     });
 });

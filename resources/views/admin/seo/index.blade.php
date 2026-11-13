@@ -50,6 +50,7 @@
                             label="عنوان متا"
                             :value="$page->title"
                             maxlength="255"
+                            :counter="60"
                             help="در تب مرورگر و نتایج جستجو نمایش داده می‌شود."
                         />
 
@@ -68,6 +69,7 @@
                                 :value="$page->description"
                                 :rows="3"
                                 maxlength="500"
+                                :counter="160"
                             />
                         </div>
 

@@ -8,6 +8,7 @@
         ['route' => 'admin.faqs.index', 'pattern' => 'admin.faqs.*', 'label' => 'سوالات متداول', 'icon' => 'message'],
         ['route' => 'admin.messages.index', 'pattern' => 'admin.messages.*', 'label' => 'پیام‌ها', 'icon' => 'inbox'],
         ['route' => 'admin.seo.index', 'pattern' => 'admin.seo.*', 'label' => 'سئوی صفحات', 'icon' => 'tag'],
+        ['route' => 'admin.seo-plan.index', 'pattern' => 'admin.seo-plan.*', 'label' => 'برنامه سئو', 'icon' => 'calendar'],
         ['route' => 'admin.settings.edit', 'pattern' => 'admin.settings.*', 'label' => 'تنظیمات سایت', 'icon' => 'settings'],
     ];
 @endphp
@@ -65,7 +66,7 @@
         </section>
 
         <footer class="border-t border-sidebar-border">
-            <div class="flex items-center gap-2.5 rounded-lg bg-white/5 p-2.5">
+            {{-- <div class="flex items-center gap-2.5 rounded-lg bg-white/5 p-2.5">
                 <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-black text-navy-950">
                     {{ mb_substr(auth()->user()->name, 0, 1) }}
                 </span>
@@ -73,7 +74,7 @@
                     <p class="truncate text-xs font-bold text-white">{{ auth()->user()->name }}</p>
                     <p class="truncate text-[10px] text-white/50" dir="ltr">{{ auth()->user()->email }}</p>
                 </div>
-            </div>
+            </div> --}}
 
             <form method="POST" action="{{ route('admin.logout') }}">
                 @csrf
