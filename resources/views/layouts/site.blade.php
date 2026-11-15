@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0b2949">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="contact-click-endpoint" content="{{ route('tracking.contact-click') }}">
 
     <x-seo :seo="$seo ?? []" :title="$title ?? null" :description="$description ?? null" :canonical="$canonical ?? null" :image="$image ?? null" />
 

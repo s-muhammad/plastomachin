@@ -9,6 +9,75 @@ const onReady = (callback) => {
 };
 
 onReady(() => {
+    // Track contact intent clicks without delaying the user's navigation.
+    if (!window.location.pathname.startsWith('/admin')) {
+        document.addEventListener('click', (event) => {
+            const link = event.target.closest('a[href]');
+            if (!link) return;
+
+            const href = link.getAttribute('href') || '';
+            let type = null;
+            if (/^https?:/i.test(href) && (href.includes('wa.me/') || href.includes('whatsapp.com/'))) type = 'whatsapp';
+
+            if (/^tel:/i.test(href)) {
+                type = 'phone';
+            } else if (/^whatsapp:/i.test(href) || /(^|\\.)wa\\.me$/i.test((() => {
+                try { return new URL(href, window.location.href).hostname; } catch { return ''; }
+            })()) || /(^|\\.)whatsapp\\.com$/i.test((() => {
+                try { return new URL(href, window.location.href).hostname; } catch { return ''; }
+            })())) {
+                type = 'whatsapp';
+            }
+
+            if (!type) return;
+
+            const query = new URLSearchParams(window.location.search);
+            let linkUrl = href;
+            if (type === 'whatsapp') {
+                try {
+                    if (/^whatsapp:/i.test(href)) {
+                        linkUrl = 'https://wa.me';
+                    } else {
+                        const target = new URL(href, window.location.href);
+                        linkUrl = target.origin + target.pathname;
+                    }
+                } catch {
+                    linkUrl = 'https://wa.me';
+                }
+            }
+            const csrf = document.querySelector('meta[name="csrf-token"]')?.content;
+            const endpoint = document.querySelector('meta[name="contact-click-endpoint"]')?.content;
+            if (!csrf || !endpoint) return;
+
+            const payload = {
+                type,
+                page_url: window.location.origin + window.location.pathname,
+                link_url: linkUrl.slice(0, 2048),
+                referrer: document.referrer ? (() => {
+                    try {
+                        const ref = new URL(document.referrer);
+                        return ref.origin + ref.pathname;
+                    } catch { return ''; }
+                })() : null,
+                utm_source: query.get('utm_source'),
+                utm_medium: query.get('utm_medium'),
+                utm_campaign: query.get('utm_campaign'),
+            };
+
+            fetch(endpoint, {
+                method: 'POST',
+                credentials: 'same-origin',
+                keepalive: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrf,
+                },
+                body: JSON.stringify(payload),
+            }).catch(() => {});
+        }, true);
+    }
+
     // Mobile navigation
     const menu = document.querySelector('[data-mobile-menu]');
     const openButton = document.querySelector('[data-mobile-menu-open]');
@@ -94,6 +163,13 @@ onReady(() => {
         import('./editor')
             .then(({ initEditors }) => initEditors())
             .catch((error) => console.error('CKEditor bundle failed to load:', error));
+    }
+
+    // SEO keyword graph (only loaded on the graph tab)
+    if (document.querySelector('[data-seo-graph]')) {
+        import('./seo-graph')
+            .then(({ initSeoGraph }) => initSeoGraph())
+            .catch((error) => console.error('SEO graph bundle failed to load:', error));
     }
 
     // Confirmation for delete buttons

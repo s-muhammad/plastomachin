@@ -7,6 +7,7 @@
         ['route' => 'admin.posts.index', 'pattern' => 'admin.posts.*', 'label' => 'مقالات', 'icon' => 'file'],
         ['route' => 'admin.faqs.index', 'pattern' => 'admin.faqs.*', 'label' => 'سوالات متداول', 'icon' => 'message'],
         ['route' => 'admin.messages.index', 'pattern' => 'admin.messages.*', 'label' => 'پیام‌ها', 'icon' => 'inbox'],
+        ['route' => 'admin.contact-analytics', 'pattern' => 'admin.contact-analytics', 'label' => 'آمار تماس و واتساپ', 'icon' => 'chart-no-axes-combined'],
         ['route' => 'admin.seo.index', 'pattern' => 'admin.seo.*', 'label' => 'سئوی صفحات', 'icon' => 'tag'],
         ['route' => 'admin.seo-plan.index', 'pattern' => 'admin.seo-plan.*', 'label' => 'برنامه سئو', 'icon' => 'calendar'],
         ['route' => 'admin.settings.edit', 'pattern' => 'admin.settings.*', 'label' => 'تنظیمات سایت', 'icon' => 'settings'],

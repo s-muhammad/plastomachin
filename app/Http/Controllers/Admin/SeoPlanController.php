@@ -23,7 +23,8 @@ class SeoPlanController extends Controller
 {
     public function index(Request $request)
     {
-        $tab = $request->query('tab') === 'tasks' ? 'tasks' : 'keywords';
+        $tab = $request->query('tab');
+        $tab = in_array($tab, ['tasks', 'graph'], true) ? $tab : 'keywords';
         $keywordFilters = $this->keywordFilters($request);
         $taskFilters = $this->taskFilters($request);
 
@@ -99,6 +100,7 @@ class SeoPlanController extends Controller
             'keywordOptions' => $keywordOptions,
             'keywordFilters' => $keywordFilters,
             'taskFilters' => $taskFilters,
+            'graph' => $tab === 'graph' ? $this->graphData($keywordFilters) : null,
             'options' => [
                 'roles' => KeywordRole::options(),
                 'page_types' => PageType::options(),
@@ -377,6 +379,171 @@ class SeoPlanController extends Controller
         $task->delete();
 
         return back()->with('success', 'تسک حذف شد.');
+    }
+
+    /**
+     * Build the keyword graph payload for the graph tab.
+     *
+     * @param  array<string, mixed>  $filters
+     * @return array<string, mixed>
+     */
+    private function graphData(array $filters): array
+    {
+        $limit = 300;
+
+        $query = SeoKeyword::query()->filter($filters);
+        $total = (clone $query)->count();
+
+        $keywords = $query
+            ->withCount([
+                'tasks as open_tasks_count' => fn ($query) => $query->where('status', '!=', TaskStatus::Done->value),
+            ])
+            ->with(['tasks' => fn ($query) => $query->orderBy('status')->orderBy('priority')->orderByDesc('id')])
+            ->orderBy('priority')
+            ->orderBy('id')
+            ->limit($limit)
+            ->get();
+
+        $nodes = [];
+
+        foreach ($keywords as $keyword) {
+            $nodes[] = [
+                'id' => $keyword->id,
+                'keyword' => $keyword->keyword,
+                'role' => $keyword->role,
+                'roleLabel' => $keyword->role_label,
+                'pageType' => $keyword->page_type,
+                'pageTypeLabel' => $keyword->page_type_label,
+                'status' => $keyword->status,
+                'statusLabel' => $keyword->status_label,
+                'priority' => $keyword->priority,
+                'volume' => $keyword->volume,
+                'competitionLabel' => $keyword->competition_label,
+                'position' => $keyword->position,
+                'targetPage' => $keyword->target_page,
+                'targetUrl' => $keyword->safe_target_url,
+                'contentTitle' => $keyword->content_title,
+                'secondaryKeywords' => $keyword->secondary_keywords,
+                'internalLinks' => $keyword->internal_links,
+                'notes' => $keyword->notes,
+                'openTasksCount' => (int) $keyword->open_tasks_count,
+                'tasks' => $keyword->tasks->map(fn (SeoTask $task) => [
+                    'title' => $task->title,
+                    'status' => $task->status,
+                    'statusLabel' => $task->status_label,
+                    'categoryLabel' => $task->category_label,
+                    'dueDate' => $task->due_date?->format('Y-m-d'),
+                    'dueDateLabel' => $task->due_date ? jalali_date($task->due_date) : null,
+                    'isOverdue' => $task->is_overdue,
+                ])->values()->all(),
+                'groups' => [
+                    'page' => $keyword->target_page !== null && $keyword->target_page !== '' ? $keyword->target_page : null,
+                    'page_type' => $keyword->page_type,
+                    'role' => $keyword->role,
+                ],
+                'tableUrl' => route('admin.seo-plan.index', ['tab' => 'keywords', 'search' => $keyword->keyword]),
+                'taskUrl' => $keyword->page_type === PageType::Blog->value
+                    ? route('admin.seo-plan.keywords.task', $keyword)
+                    : null,
+                'canCreateTask' => $keyword->page_type === PageType::Blog->value
+                    && (int) $keyword->open_tasks_count === 0,
+            ];
+        }
+
+        return [
+            'nodes' => $nodes,
+            'related' => $this->relatedKeywordEdges($keywords),
+            'total' => $total,
+            'truncated' => $total > count($nodes),
+            'labels' => [
+                'page_types' => PageType::options(),
+                'roles' => KeywordRole::options(),
+                'statuses' => KeywordStatus::options(),
+            ],
+        ];
+    }
+
+    /**
+     * Link keywords that are mentioned in another keyword's secondary keywords or internal links.
+     *
+     * @param  \Illuminate\Support\Collection<int, SeoKeyword>  $keywords
+     * @return list<array{source: int, target: int}>
+     */
+    private function relatedKeywordEdges($keywords): array
+    {
+        $normalized = [];
+
+        foreach ($keywords as $keyword) {
+            $normalized[$keyword->id] = $this->normalizeText($keyword->keyword);
+        }
+
+        $edges = [];
+
+        foreach ($keywords as $keyword) {
+            $phrases = $this->splitPhrases($keyword->secondary_keywords.' '.$keyword->internal_links);
+            $matches = 0;
+
+            foreach ($phrases as $phrase) {
+                $phrase = $this->normalizeText($phrase);
+
+                if (mb_strlen($phrase) < 8) {
+                    continue;
+                }
+
+                foreach ($normalized as $otherId => $other) {
+                    if ($otherId === $keyword->id || mb_strlen($other) < 6) {
+                        continue;
+                    }
+
+                    if (! str_contains($other, $phrase) && ! str_contains($phrase, $other)) {
+                        continue;
+                    }
+
+                    $source = min($keyword->id, $otherId);
+                    $target = max($keyword->id, $otherId);
+
+                    $edges[$source.':'.$target] = ['source' => $source, 'target' => $target];
+
+                    if (++$matches >= 4) {
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        return array_values($edges);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function splitPhrases(?string $text): array
+    {
+        if ($text === null || $text === '') {
+            return [];
+        }
+
+        $parts = preg_split('/[،,;؛\n\r]+/u', $text) ?: [];
+
+        return array_values(array_filter(array_map('trim', $parts), fn (string $part) => $part !== ''));
+    }
+
+    private function normalizeText(?string $text): string
+    {
+        if ($text === null || $text === '') {
+            return '';
+        }
+
+        $text = str_replace(
+            ["\u{200c}", "\u{200f}", "\u{200e}", 'ي', 'ك', 'ۀ', 'ة', 'أ', 'إ', 'آ'],
+            ['', '', '', 'ی', 'ک', 'ه', 'ه', 'ا', 'ا', 'ا'],
+            $text,
+        );
+
+        $text = preg_replace('/[^\p{L}\p{N}\s]+/u', ' ', $text) ?? '';
+        $text = preg_replace('/\s+/u', ' ', $text) ?? '';
+
+        return mb_strtolower(trim($text));
     }
 
     /**

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\ContactAnalyticsController;
+use App\Http\Controllers\Site\ContactClickTrackingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PostController;
@@ -21,6 +23,7 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contact.store');
+Route::post('/tracking/contact-click', [ContactClickTrackingController::class, 'store'])->middleware('throttle:60,1')->name('tracking.contact-click');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/faq', SiteFaqController::class)->name('faq');
@@ -37,6 +40,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
+        Route::get('/contact-analytics', ContactAnalyticsController::class)->name('contact-analytics');
 
         Route::resource('services', ServicePageController::class)->except('show');
         Route::post('/services/{service}/toggle', [ServicePageController::class, 'toggle'])->name('services.toggle');

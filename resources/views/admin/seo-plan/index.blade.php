@@ -20,6 +20,15 @@
                 <x-icon name="external" class="size-4" />
                 خروجی CSV
             </a>
+        @elseif ($tab === 'graph')
+            <a href="{{ route('admin.seo-plan.index', ['tab' => 'keywords']) }}" class="btn-brand !rounded-lg !px-4 !py-2.5">
+                <x-icon name="tag" class="size-4" />
+                مدیریت کلمات
+            </a>
+            <a href="{{ route('admin.seo-plan.index', ['tab' => 'tasks']) }}" class="btn" data-variant="outline">
+                <x-icon name="check" class="size-4" />
+                کارها
+            </a>
         @else
             <button type="button" class="btn-brand !rounded-lg !px-4 !py-2.5" data-create-dialog="task-create-dialog">
                 <x-icon name="plus" class="size-4" />
@@ -46,6 +55,13 @@
         >
             کارها
             <span class="badge border border-slate-200 bg-slate-100 text-[10px] text-slate-500">{{ fa_num($stats['tasks']) }}</span>
+        </a>
+        <a
+            href="{{ route('admin.seo-plan.index', ['tab' => 'graph']) }}"
+            class="-mb-px inline-flex items-center gap-2 border-b-2 px-3 py-2 text-sm font-bold transition {{ $tab === 'graph' ? 'border-brand text-navy' : 'border-transparent text-slate-500 hover:text-navy' }}"
+        >
+            گراف
+            <span class="badge border border-slate-200 bg-slate-100 text-[10px] text-slate-500">{{ fa_num($stats['total']) }}</span>
         </a>
     </div>
 
@@ -466,7 +482,7 @@
                 });
             </script>
         @endif
-    @else
+    @elseif ($tab === 'tasks')
         @php
             $taskBaseQuery = collect(request()->query())->except('page')->all();
         @endphp
@@ -652,5 +668,12 @@
                 });
             </script>
         @endif
+    @elseif ($tab === 'graph')
+        @include('admin.seo-plan._graph', [
+            'graph' => $graph,
+            'keywordFilters' => $keywordFilters,
+            'options' => $options,
+            'targetPages' => $targetPages,
+        ])
     @endif
 @endsection
